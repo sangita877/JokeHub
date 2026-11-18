@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>JokeHub | Random Joke Generator</title>
+
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar">
+      <h1>Joke<span>Hub</span></h1>
+      <p>Your daily dose of laughter!</p>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <section class="intro">
+      <h2>Need a Little Laugh?</h2>
+      <p>Choose a category and discover a random joke!</p>
+    </section>
+    
+
+    <section class="joke-section">
+
+      <form action="/" method="GET">
+
+        <label for="category">Choose Joke Category:</label>
+        <img src="/images/joke.png" alt="Joke Image" class="joke-image">
+
+        <select name="category" id="category">
+          <% categories.forEach(function(category) { %>
+            <option
+              value="<%= category %>"
+              <%= selectedCategory === category ? "selected" : "" %>>
+              <%= category %>
+            </option>
+          <% }); %>
+        </select>
+
+        <button type="submit" class="button">
+          Get a Joke
+        </button>
+
+      </form>
+
+      <% if (error) { %>
+
+        <div class="error">
+          <p><%= error %></p>
+        </div>
+
+      <% } else if (joke) { %>
+
+        <div class="joke-card">
+
+          <p class="category">
+            Category: <%= joke.category %>
+          </p>
+
+          <% if (joke.type === "single") { %>
+
+            <p class="joke-text">
+              <%= joke.joke %>
+            </p>
+
+          <% } else { %>
+
+            <p class="joke-text">
+              <strong><%= joke.setup %></strong>
+            </p>
+
+            <p class="joke-answer">
+              <%= joke.delivery %>
+            </p>
+
+          <% } %>
+
+          <p class="joke-id">
+            Joke ID: <%= joke.id %>
+          </p>
+
+        </div>
+
+      <% } %>
+
+      <a href="/?category=<%= selectedCategory %>" class="refresh">
+        Get Another Joke ↻
+      </a>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 JokeHub | Powered by JokeAPI</p>
+  </footer>
+
+</body>
+</html>
