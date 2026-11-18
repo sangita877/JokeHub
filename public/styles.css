@@ -51,8 +51,8 @@ header {
   
 }
 .joke-image {
-  width: 100%;
-  max-width: 400px;
+  height: 500px;
+  width: 50%;
   margin-bottom: 20px;
   border-radius: 10px;
 }
